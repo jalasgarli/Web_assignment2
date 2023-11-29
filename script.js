@@ -22,12 +22,12 @@ function fetchProducts(productsData, container) {
     productsArray.forEach(product => {
         container.innerHTML += `
             <div class="product">
+                <img class="product_img" src="${product.thumbnail}" alt="${product.title}">
                 <h3 class="product_title">${product.title}</h3>
                 <p class="product-price">${product.price}</p>
                 <p class="product_discount">${product.discount}</p>
                 <p class="product_category">${product.category}</p>
                 <p class="product_stock">${product.stock}</p>
-                <img class="product_img" src="${product.thumbnail}" alt="${product.title}">
             </div>
         `;
     });
