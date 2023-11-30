@@ -35,8 +35,8 @@ function fetchProducts(productsArray, container) {
         container.innerHTML += `
             <div class="product" id="${product.id}">
                 <img class="product_img" src="${product.thumbnail}" alt="${product.title}">
-                <h4 class="product_title">${product.title}</h4>
                 <div class="product_data"> 
+                    <h4 class="product_title">${product.title}</h4>
                     <p class="product_price">Price: ${product.price}</p>
                     <p class="product_discount">Discount: ${product.discountPercentage}</p>
                     <p class="product_category">Category: ${product.category}</p>
