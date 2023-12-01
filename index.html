@@ -8,9 +8,34 @@
     <link rel="stylesheet"  href="style.css">
 </head>
 <body>
-    <div id="search">
-        <span class="search-icon"><i class="fas fa-search"></i></span>
-        <input type="text" id="search_keyword" placeholder="Search...">
+    <div class="search-filter">
+        <div id="search">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
+            <input type="text" id="search_keyword" placeholder="Search...">
+        </div>
+            <div id="categoryFilters">
+                <label><input type="checkbox" class="categoryCheckbox" value="all">All Categories</label>
+            <label>
+                <input type="checkbox" class="categoryCheckbox" value="smartphones">Smartphones
+            </label>
+            <label>
+                <input type="checkbox" class="categoryCheckbox" value="laptops">
+                Laptops
+            </label>
+            <label>
+                <input type="checkbox" class="categoryCheckbox" value="fragrances">
+                Fragrances
+            </label>
+            <label>
+                <input type="checkbox" class="categoryCheckbox" value="skincare">
+                Skincare
+            </label>
+            <label>
+                <input type="checkbox" class="categoryCheckbox" value="groceries">
+                Groceries
+            </label>
+            <label><input type="checkbox" class="categoryCheckbox" value="home-decoration"> Home Decoration</label>
+        </div>
     </div>
     <div id="products"></div>
 </body>

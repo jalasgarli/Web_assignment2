@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const productsContainer = document.getElementById('products');
     const searchInput = document.getElementById('search_keyword');
-    console.log(search);
+    const filterInput = document.querySelectorAll('.categoryCheckbox');
+
+    console.log(filterInput);
+
     fetch('https://dummyjson.com/products')
         .then(response => {
             if (!response.ok) {
@@ -10,27 +13,32 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            const product_array = data.products;
-            fetchProducts(product_array, productsContainer);
-
+            const productArray = data.products;
+            fetchProducts(productArray, productsContainer);
 
             searchInput.addEventListener('input', function () {
-                const searchKeword = searchInput.value.toLowerCase();
-                const filteredProducts =  filterProducts(product_array, searchKeword);
-                displayProducts(filteredProducts, productsContainer);
-                console.log(searchKeword);
+                const searchKeyword = searchInput.value.toLowerCase();
+                const filteredProduct = filterProducts(productArray, searchKeyword);
+                displayProducts(filteredProduct, productsContainer);
+                console.log(searchKeyword);
+            });
+
+            filterInput.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const searchKeyword = searchInput.value.toLowerCase();
+                    const selectedCategory = categoryProducts();
+                    const filteredProduct = filterProducts(productArray, selectedCategory);
+                    displayProducts(filteredProduct, productsContainer);
+                });
             });
         })
         .catch(error => {
             console.error('Error fetching data:', error.message);
     });
-
-    
 });
 
 function fetchProducts(productsArray, container) {
-    console.log(productsArray);
-    container.innerHTML = ``;
+    container.innerHTML = '';
     productsArray.forEach(product => {
         container.innerHTML += `
             <div class="product" id="${product.id}">
@@ -43,7 +51,6 @@ function fetchProducts(productsArray, container) {
                     <p class="product_stock">Stock: ${product.stock}</p>
                 </div>
             </div>
-  
         `;
     });
 }
@@ -52,12 +59,27 @@ function filterProducts(productArray, keyword) {
     return productArray.filter(product => {
         const title = product.title.toLowerCase().includes(keyword);
         const category = product.category.toLowerCase().includes(keyword);
-        /// about desc;
-
         return title || category;
-    })
+    });
+}
+
+function filterProductsByCategory(productArray, selectedCategory) {
+    return productArray.filter(product => {
+        const categoryMatch = selectedCategory.includes('all') || selectedCategory.includes(product.category.toLowerCase());
+        return categoryMatch;
+    });
 }
 
 function displayProducts(productArray, container) {
-    fetchProducts(productArray, container)
+    fetchProducts(productArray, container);
+}
+
+function categoryProducts() {
+    const selectedElements = [];
+    const categoryElements = document.querySelectorAll('.categoryCheckbox:checked');
+
+    categoryElements.forEach(checkbox => {
+        selectedElements.push(checkbox.value);
+    });
+    return selectedElements;
 }
