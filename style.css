@@ -66,3 +66,12 @@ body {
    
 }
 
+
+#categoryFilters {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: solid;
+    text-align: center;
+    padding: 3px;
+    height: 15px; /* Adjust the width of the checkbox */ 
+}

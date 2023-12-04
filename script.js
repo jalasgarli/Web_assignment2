@@ -22,16 +22,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 displayProducts(filteredProduct, productsContainer);
                 console.log(searchKeyword);
             });
-
+            
             filterInput.forEach(checkbox => {
                 checkbox.addEventListener('change', function () {
-                    const searchKeyword = searchInput.value.toLowerCase();
-                    const selectedCategory = categoryProducts();
-                    const filteredProduct = filterProducts(productArray, selectedCategory);
+                    const selectedCategories = categoryProducts();
+                    const filteredProduct = filterProductsByCategory(productArray, selectedCategories);
                     displayProducts(filteredProduct, productsContainer);
                 });
-            });
+            });            
         })
+
         .catch(error => {
             console.error('Error fetching data:', error.message);
     });
@@ -81,5 +81,5 @@ function categoryProducts() {
     categoryElements.forEach(checkbox => {
         selectedElements.push(checkbox.value);
     });
-    return selectedElements;
+    return selectedElements.length > 0 ? selectedElements : ['all'];;
 }
