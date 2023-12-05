@@ -41,7 +41,7 @@ body {
 .product_img {
     padding: 5px;
     max-width: 300px;
-    max-height: 200px;
+    height: 200px;
     margin: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    
     border-radius: 10px;
@@ -53,11 +53,11 @@ button {
 
 
 .product_data {
+    padding: 10px;
+    justify-content: center;
     text-align: center;
-    margin: 5px;
-    padding: 12px;
-    width: 200px;
-    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 5px;
 }
 
 #search_keyword {

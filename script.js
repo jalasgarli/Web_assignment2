@@ -1,6 +1,6 @@
 const pageSize = 10;
 let currentPage = 1;
-let productsContainer; // Declare productsContainer in the global scope
+let productsContainer; 
 
 document.addEventListener('DOMContentLoaded', function () {
     productsContainer = document.getElementById('products');
@@ -90,7 +90,6 @@ function displayProducts(productArray, container) {
     fetchProducts(productArray, container, currentPage, pageSize);
     updatePaginationControls(productArray.length, currentPage, pageSize);
 }
-
 
 
 function categoryProducts() {
