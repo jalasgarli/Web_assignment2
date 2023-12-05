@@ -24,15 +24,13 @@ body {
 
 .product {
     width: 350px;
-    height: 450px;
+    height: 500px;
     text-align: center;
     background-color: rgb(241,203,48);
     justify-content: center;
     overflow: hidden;
     border-radius: 3px;
     margin: 3px;
-
-    
 }
 
 .product:hover {
@@ -49,11 +47,17 @@ body {
     border-radius: 10px;
 }
 
+button {
+    background-color:  rgba(0, 0, 0, 0.1);    
+}
+
+
 .product_data {
     text-align: center;
-    padding: 5px;
-
-    margin-bottom: auto; 
+    margin: 5px;
+    padding: 12px;
+    width: 200px;
+    height: 200px;
 }
 
 #search_keyword {
@@ -66,12 +70,16 @@ body {
    
 }
 
-
 #categoryFilters {
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: solid;
     text-align: center;
     padding: 3px;
-    height: 15px; /* Adjust the width of the checkbox */ 
+    height: 15px;
 }
+
+#productdetails {
+    background-color: black;
+}
+

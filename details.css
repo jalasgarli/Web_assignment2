@@ -1,0 +1,48 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3px;
+    background-color: rgb(241,203,48);
+}
+
+.product {
+    width: 350px;
+    height: 500px;
+    text-align: center;
+    background-color: rgb(241,203,48);
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+.product:hover {
+    transform: scale(1.005);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#gallery {
+    padding: 5px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#gallery img {
+    max-width: 300px;
+    max-height: 200px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#details {
+    align-items: center;
+}
