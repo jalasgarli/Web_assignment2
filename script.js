@@ -1,10 +1,13 @@
+const pageSize = 10;
+let currentPage = 1;
+let productsContainer; // Declare productsContainer in the global scope
+
 document.addEventListener('DOMContentLoaded', function () {
-    const productsContainer = document.getElementById('products');
+    productsContainer = document.getElementById('products');
     const searchInput = document.getElementById('search_keyword');
     const filterInput = document.querySelectorAll('.categoryCheckbox');
 
-
-    fetch('https://dummyjson.com/products')
+    fetch(`https://dummyjson.com/products/?limit=100`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -13,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             productsData = data.products;
-            fetchProducts(productsData, productsContainer);
+            fetchProducts(productsData, productsContainer, currentPage, pageSize);
 
             searchInput.addEventListener('input', function () {
                 const searchKeyword = searchInput.value.toLowerCase();
@@ -34,10 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-function fetchProducts(productsArray, container) {
-    console.log(productsArray);
+
+function fetchProducts(productsArray, container, currentPage, pageSize) {
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+    const paginatedItems = productsArray.slice(start, end);
+
     container.innerHTML = '';
-    productsArray.forEach(product => {
+    paginatedItems.forEach(product => {
         container.innerHTML += `
             <div class="product" id="${product.id}">
                 <img class="product_img" src="${product.thumbnail}" alt="${product.title}">
@@ -54,6 +61,8 @@ function fetchProducts(productsArray, container) {
             </div>
         `;
     });
+
+    updatePaginationControls(productsArray.length, currentPage, pageSize);
 }
 
 function openProductPage(productId) {
@@ -78,8 +87,11 @@ function filterProductsByCategory(productArray, selectedCategory) {
 }
 
 function displayProducts(productArray, container) {
-    fetchProducts(productArray, container);
+    fetchProducts(productArray, container, currentPage, pageSize);
+    updatePaginationControls(productArray.length, currentPage, pageSize);
 }
+
+
 
 function categoryProducts() {
     const selectedElements = [];
@@ -91,3 +103,17 @@ function categoryProducts() {
     return selectedElements.length > 0 ? selectedElements : ['all'];
 }
 
+function updatePaginationControls(totalItems, currentPage, pageSize) {
+    const totalPages = Math.ceil(totalItems / pageSize);
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';
+
+    for(let i = 1; i <= totalPages; i++) {
+        paginationContainer.innerHTML += `<button onclick="changePage(${i})">${i}</button>`;
+    }
+}
+
+function changePage(page) {
+    currentPage = page;
+    displayProducts(productsData, productsContainer);
+}
